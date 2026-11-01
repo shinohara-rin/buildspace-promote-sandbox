@@ -1,0 +1,29 @@
+name: Stage
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Build and package only, without publishing a staging release
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    # BUILDSPACE_REF: setup.sh points this and promote.yml at the branch under test.
+    uses: shinohara-rin/buildspace/.github/workflows/swift-stage.yml@cw/feat/eng-4678-promote-minimum-staging-age
+    permissions:
+      contents: write
+      actions: read
+      attestations: write
+      id-token: write
+      pull-requests: read
+    with:
+      package-name: promote-sandbox
+      identifier: codes.photon.promote-sandbox
+      dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
