@@ -22,7 +22,7 @@ permissions:
 jobs:
   promote:
     # BUILDSPACE_REF: setup.sh points this and stage.yml at the branch under test.
-    uses: shinohara-rin/buildspace/.github/workflows/swift-promote.yml@cw/feat/eng-4678-promote-minimum-staging-age
+    uses: photon-hq/buildspace/.github/workflows/swift-promote.yml@657803b719546b00fdd7666687f05ed93cf36776
     permissions:
       contents: write
       actions: read
